@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flow</title>
+  </head>
+  <body>
+    <h2>用户“种”番茄使用流程</h2>
+    <pre class="mermaid">
+      flowchart TB
+        D["开始启动一个番茄倒计时"]
+        D --> D1{"是否登录"}
+        D1 -->|否| 提示注册或登录
+        D1 -->|是| E["输入番茄标题和标签，标题可选"]
+        E --> F["番茄闹钟暂停"]
+        F --> F1["放弃番茄"]
+        F --> F2["继续番茄"]
+        F2 --> G
+        E --> G["番茄闹钟结束"]
+        G --> H["番茄闹钟数据正常记录，可再次“种”番茄"]
+    </pre>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+  </body>
+</html>
