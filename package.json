@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint:next": "next lint",
+    "test": "echo 'no-test passed'",
     "ci": "git pull && pnpm install && pnpm build && pm2 restart time-pay-where",
     "prepare": "husky install",
     "lint": "pnpm lint:format && pnpm lint:next",
