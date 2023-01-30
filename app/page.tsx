@@ -234,7 +234,7 @@ export default function Home() {
                               <span className='text-sky-400 text-sm font-light uppercase mr-3'>
                                  {item.type}
                               </span>
-                              <span className='text-gray-400 text-sm group-hover:underline group-hover:text-gray-100 underline-offset-4 decoration-sky-400'>
+                              <span className='text-gray-400 text-sm group-hover:underline group-hover:text-white underline-offset-4 decoration-sky-400'>
                                  {dayjs(item.createTime).format('DD/MM/YYYY')}
                               </span>
                            </div>
