@@ -89,8 +89,16 @@ export default function Home() {
       ? Date.now() + store.get(totalLocalKey, undefined)
       : Date.now() + (actived?.timeLen ?? 0) * 1000 * 60
 
+   const audioWithDingRef = useRef<HTMLAudioElement>(null)
+
    return (
       <main>
+         <audio
+            ref={audioWithDingRef}
+            className='hidden'
+            controls
+            src='/_assets/ding.mp3'
+         ></audio>
          <div className='mx-auto max-w-screen-sm'>
             <div className='text-white text-lg flex justify-end p-4'>
                <Link
@@ -143,6 +151,7 @@ export default function Home() {
                                  })
                                  setCounting(false)
                                  store.set(countingLocalKey, false)
+                                 audioWithDingRef.current?.play()
                               }}
                               onTick={(data) => {
                                  store.set(totalLocalKey, data.total)
