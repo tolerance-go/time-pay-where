@@ -218,7 +218,7 @@ export default function Home() {
                                  <div className='rounded-full bg-[#2e2e2e] p-1 text-sky-400 text-xs w-5 h-5 flex items-center justify-center'>
                                     {index + 1}
                                  </div>
-                                 <h2 className='text-white text-lg font-bold'>
+                                 <h2 className='text-gray-100 text-lg font-bold'>
                                     {item.title || 'chore'}
                                  </h2>
                                  <div className='space-x-1.5'>
@@ -234,7 +234,7 @@ export default function Home() {
                               <span className='text-sky-400 text-sm font-light uppercase mr-3'>
                                  {item.type}
                               </span>
-                              <span className='text-gray-400 text-sm group-hover:underline group-hover:text-white underline-offset-4 decoration-sky-400'>
+                              <span className='text-gray-400 text-sm group-hover:underline group-hover:text-gray-100 underline-offset-4 decoration-sky-400'>
                                  {dayjs(item.createTime).format('DD/MM/YYYY')}
                               </span>
                            </div>
