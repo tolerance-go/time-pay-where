@@ -21,7 +21,7 @@ import { FormValues, TomatoList } from '@/types/core'
 import Link from 'next/link'
 import styles from './page.module.css'
 
-const defaultTimeLen = 5
+const defaultTimeLen = 15
 
 export default function Home() {
    const countdownRef = useRef<Countdown>(null)
