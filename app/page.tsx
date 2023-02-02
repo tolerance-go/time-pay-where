@@ -21,6 +21,8 @@ import { FormValues, TomatoList } from '@/types/core'
 import Link from 'next/link'
 import styles from './page.module.css'
 
+const defaultTimeLen = 5
+
 export default function Home() {
    const countdownRef = useRef<Countdown>(null)
    const [pause, setPause] = useState(false)
@@ -37,7 +39,7 @@ export default function Home() {
       criteriaMode: 'all',
       defaultValues: {
          title: 'chore',
-         timeLen: 15,
+         timeLen: defaultTimeLen,
       },
    })
 
@@ -206,40 +208,44 @@ export default function Home() {
             >
                {tomatoList ? (
                   tomatoList.length ? (
-                     tomatoList.map((item, index) => (
-                        <Link
-                           href={`/day-time/${item.createTime}`}
-                           key={item.uid}
-                           target='_blank'
-                           className='flex group justify-between py-4 border-b border-b-gray-800 last:border-b-transparent'
-                        >
-                           <div className='flex-grow flex justify-between'>
-                              <div className=' flex space-x-4 items-center'>
-                                 <div className='rounded-full bg-[#2e2e2e] p-1 text-sky-400 text-xs w-5 h-5 flex items-center justify-center'>
-                                    {index + 1}
-                                 </div>
-                                 <h2 className='text-gray-100 text-lg font-bold'>
-                                    {item.title || 'chore'}
-                                 </h2>
-                                 <div className='space-x-1.5'>
-                                    {Array(Math.floor(item.timeLen / 15))
-                                       .fill(null)
-                                       .map((_, index) => (
-                                          <span key={index}>🍅</span>
-                                       ))}
+                     tomatoList
+                        .sort((a, b) => b.createTime - a.createTime)
+                        .map((item, index) => (
+                           <Link
+                              href={`/day-time/${item.createTime}`}
+                              key={item.uid}
+                              target='_blank'
+                              className='flex group justify-between py-4 border-b border-b-gray-800 last:border-b-transparent'
+                           >
+                              <div className='flex-grow flex justify-between'>
+                                 <div className=' flex space-x-4 items-center'>
+                                    <div className='rounded-full bg-[#2e2e2e] p-1 text-sky-400 text-xs w-5 h-5 flex items-center justify-center'>
+                                       {index + 1}
+                                    </div>
+                                    <h2 className='text-gray-100 text-lg font-bold'>
+                                       {item.title || 'chore'}
+                                    </h2>
+                                    <div className='space-x-1.5'>
+                                       {Array(Math.floor(item.timeLen / 15))
+                                          .fill(null)
+                                          .map((_, index) => (
+                                             <span key={index}>🍅</span>
+                                          ))}
+                                    </div>
                                  </div>
                               </div>
-                           </div>
-                           <div>
-                              <span className='text-sky-400 text-sm font-light uppercase mr-3'>
-                                 {item.type}
-                              </span>
-                              <span className='text-gray-400 text-sm group-hover:underline group-hover:text-white underline-offset-4 decoration-sky-400'>
-                                 {dayjs(item.createTime).format('DD/MM/YYYY')}
-                              </span>
-                           </div>
-                        </Link>
-                     ))
+                              <div>
+                                 <span className='text-sky-400 text-sm font-light uppercase mr-3'>
+                                    {item.type}
+                                 </span>
+                                 <span className='text-gray-400 text-sm group-hover:underline group-hover:text-white underline-offset-4 decoration-sky-400'>
+                                    {dayjs(item.createTime).format(
+                                       'DD/MM/YYYY',
+                                    )}
+                                 </span>
+                              </div>
+                           </Link>
+                        ))
                   ) : (
                      <div className='flex justify-center text-white py-4'>
                         暂无记录
@@ -298,7 +304,7 @@ export default function Home() {
                                        <input
                                           id='timeLen'
                                           type={'number'}
-                                          step='5'
+                                          step={defaultTimeLen}
                                           {...register('timeLen', {
                                              required: '时长必填喔',
                                              max: {
